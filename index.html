@@ -56,6 +56,30 @@ h1{display:flex;align-items:center;gap:10px;margin:18px 0 8px;font-size:26px;lin
 @media (max-width:1200px){.layout{grid-template-columns:1fr}.grid{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:760px){.page{padding:0 18px 40px}.grid{grid-template-columns:repeat(2,1fr)}.cover{font-size:32px}}
 @media (max-width:460px){.grid{grid-template-columns:1fr}}
+.entry{position:fixed;z-index:50;overflow:hidden;background:var(--card);border-radius:6px;
+  transition:top .5s cubic-bezier(.2,.75,.2,1),left .5s cubic-bezier(.2,.75,.2,1),width .5s cubic-bezier(.2,.75,.2,1),height .5s cubic-bezier(.2,.75,.2,1),border-radius .5s,background .35s}
+.entry.ready{background:var(--bg)}
+.entry .inner{height:100%;overflow-y:auto;opacity:0;transition:opacity .35s}
+.entry.ready .inner{opacity:1}
+.e-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;padding:10px 20px;background:#191919ee;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.e-back{display:inline-flex;align-items:center;gap:6px;background:var(--chip);color:var(--strong);border:0;border-radius:20px;padding:5px 12px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+.e-back:hover{background:#3a3a3a}
+.e-back:focus-visible{outline:2px solid #6fb1ff;outline-offset:2px}
+.e-cover{height:200px;display:flex;align-items:center;justify-content:center;padding:0 16px;text-align:center;
+  background:var(--cover) repeating-linear-gradient(135deg,#ffffff00 0 14px,#ffffff10 14px 28px);
+  font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:clamp(48px,9vw,96px);line-height:1;color:var(--yellow)}
+.e-cover.pic{background:linear-gradient(160deg,#f2b8c6,#e7eef7 55%,#d9d2c0)}
+.e-wrap{max-width:780px;margin:0 auto;padding:0 24px 90px}
+.entry h1{font-size:38px;margin:28px 0 6px;gap:14px}
+.e-meta{font-size:12.5px;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--line)}
+.entry h2{font-size:21px;color:var(--strong);margin:34px 0 8px}
+.entry p,.entry li{font-size:15px;line-height:1.7}
+.entry ul,.entry ol{padding-left:22px}
+.entry .callout{margin:22px 0}
+.entry table{width:100%;border-collapse:collapse;font-size:14px}
+.entry th,.entry td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.entry th{color:var(--strong);background:#ffffff0a}
+@media (prefers-reduced-motion:reduce){.entry,.entry .inner{transition-duration:.01s}}
 </style>
 </head>
 <body>
@@ -80,22 +104,18 @@ h1{display:flex;align-items:center;gap:10px;margin:18px 0 8px;font-size:26px;lin
     <nav class="side" aria-label="Wiki sections">
       <section>
         <h2>Team</h2>
-        <a href="#"><span aria-hidden="true">❓</span> What is this for?</a>
-        <a href="#"><span aria-hidden="true">📖</span> Rules</a>
-        <a href="#"><span aria-hidden="true">🔰</span> Membership Directory</a>
-        <a href="#"><span aria-hidden="true">🗣️</span> Anonymous Feedback</a>
+        <a href="#what-is-this" data-id="what-is-this"><span aria-hidden="true">❓</span> What is this for?</a>
+        <a href="#rules" data-id="rules"><span aria-hidden="true">📖</span> Rules</a>
       </section>
       <section>
         <h2>Policies</h2>
-        <a href="#"><span aria-hidden="true">🌅</span> Absence Policy</a>
-        <a href="#"><span aria-hidden="true">🛡️</span> Moderation Guidelines</a>
-        <a href="#"><span aria-hidden="true">🚩</span> How to [Punishments]</a>
+        <a href="#absence" data-id="absence"><span aria-hidden="true">🌅</span> Absence Policy</a>
+        <a href="#guidelines" data-id="guidelines"><span aria-hidden="true">🛡️</span> Moderation Guidelines</a>
+        <a href="#punishments" data-id="punishments"><span aria-hidden="true">🚩</span> How to [Punishments]</a>
       </section>
       <section>
         <h2>Staff-Related</h2>
-        <a href="#"><span aria-hidden="true">😀</span> Promotions</a>
-        <a href="#"><span aria-hidden="true">😨</span> Demotions</a>
-        <a href="#"><span aria-hidden="true">📅</span> Team-Calendar</a>
+        <a href="#calendar" data-id="calendar"><span aria-hidden="true">📅</span> Team-Calendar</a>
       </section>
     </nav>
 
@@ -107,16 +127,12 @@ h1{display:flex;align-items:center;gap:10px;margin:18px 0 8px;font-size:26px;lin
         </label>
       </div>
       <div class="grid" id="grid">
-        <a class="card" href="#"><div class="cover-wrap pic"></div><div class="body"><div class="title"><span aria-hidden="true">❓</span> What is this for?</div><div class="meta">January 20, 2026 11:06 AM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
-        <a class="card" href="#"><div class="cover-wrap"><div class="cover">RULES</div></div><div class="body"><div class="title"><span aria-hidden="true">📖</span> Rules</div><div class="meta">January 20, 2026 1:10 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
-        <a class="card" href="#"><div class="cover-wrap"><div class="cover">GUIDELINES</div></div><div class="body"><div class="title"><span aria-hidden="true">🛡️</span> Moderation Guidelines</div><div class="meta">January 20, 2026 1:11 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
-        <a class="card" href="#"><div class="cover-wrap"><div class="cover">ABSENCE</div></div><div class="body"><div class="title"><span aria-hidden="true">🌅</span> Absence Policy</div><div class="meta">January 20, 2026 1:11 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
-        <a class="card" href="#"><div class="cover-wrap"><div class="cover">PUNISHMENTS</div></div><div class="body"><div class="title"><span aria-hidden="true">🚩</span> How to [Punishments]</div><div class="meta">January 20, 2026 1:11 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
-        <a class="card" href="#"><div class="cover-wrap"><div class="cover">CALENDAR</div></div><div class="body"><div class="title"><span aria-hidden="true">📅</span> Team-Calendar</div><div class="meta">January 20, 2026 1:11 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
-        <a class="card" href="#"><div class="cover-wrap"><div class="cover">PROMOTIONS</div></div><div class="body"><div class="title"><span aria-hidden="true">😀</span> Promotions</div><div class="meta">January 20, 2026 1:12 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
-        <a class="card" href="#"><div class="cover-wrap"><div class="cover">DEMOTIONS</div></div><div class="body"><div class="title"><span aria-hidden="true">😨</span> Demotions</div><div class="meta">January 20, 2026 1:12 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
-        <a class="card" href="#"><div class="cover-wrap"><div class="cover">FEEDBACK</div></div><div class="body"><div class="title"><span aria-hidden="true">🗣️</span> Anonymous Feedback</div><div class="meta">January 20, 2026 1:20 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
-        <a class="card" href="#"><div class="cover-wrap plain"></div><div class="body"><div class="title"><span aria-hidden="true">🔰</span> Membership Directory</div><div class="meta">January 22, 2026 3:25 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
+        <a class="card" href="#what-is-this" data-id="what-is-this"><div class="cover-wrap pic"></div><div class="body"><div class="title"><span aria-hidden="true">❓</span> What is this for?</div><div class="meta">January 20, 2026 11:06 AM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
+        <a class="card" href="#rules" data-id="rules"><div class="cover-wrap"><div class="cover">RULES</div></div><div class="body"><div class="title"><span aria-hidden="true">📖</span> Rules</div><div class="meta">January 20, 2026 1:10 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
+        <a class="card" href="#guidelines" data-id="guidelines"><div class="cover-wrap"><div class="cover">GUIDELINES</div></div><div class="body"><div class="title"><span aria-hidden="true">🛡️</span> Moderation Guidelines</div><div class="meta">January 20, 2026 1:11 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
+        <a class="card" href="#absence" data-id="absence"><div class="cover-wrap"><div class="cover">ABSENCE</div></div><div class="body"><div class="title"><span aria-hidden="true">🌅</span> Absence Policy</div><div class="meta">January 20, 2026 1:11 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
+        <a class="card" href="#punishments" data-id="punishments"><div class="cover-wrap"><div class="cover">PUNISHMENTS</div></div><div class="body"><div class="title"><span aria-hidden="true">🚩</span> How to [Punishments]</div><div class="meta">January 20, 2026 1:11 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
+        <a class="card" href="#calendar" data-id="calendar"><div class="cover-wrap"><div class="cover">CALENDAR</div></div><div class="body"><div class="title"><span aria-hidden="true">📅</span> Team-Calendar</div><div class="meta">January 20, 2026 1:11 PM</div><div class="who"><span class="av">🌙</span> Wisp</div></div></a>
       </div>
     </section>
   </div>
@@ -128,6 +144,98 @@ h1{display:flex;align-items:center;gap:10px;margin:18px 0 8px;font-size:26px;lin
     const t = q.value.trim().toLowerCase();
     cards.forEach(c => c.classList.toggle('hide', t && !c.textContent.toLowerCase().includes(t)));
   });
+</script>
+<script>
+/* Edit the text below to change each wiki entry. */
+const entries = {
+ 'what-is-this': {icon:'❓', title:'What is this for?', cover:'WHAT IS THIS?', pic:true, edited:'January 20, 2026 11:06 AM',
+  body:`<p>This hub is the internal wiki for the moderation team. Everything you need to do the job lives here, so check it before you ask.</p>
+  <h2>What you'll find here</h2>
+  <ul><li>The team rules and moderation guidelines.</li><li>How to handle punishments and absences.</li><li>The team calendar.</li></ul>
+  <h2>Can't find an answer?</h2><p>Ask in the team channel. If the answer should have been here, it will be added.</p>`},
+ 'rules': {icon:'📖', title:'Rules', cover:'RULES', edited:'January 20, 2026 1:10 PM',
+  body:`<p>These rules apply to every member of the team.</p>
+  <h2>General rules</h2>
+  <ol><li>Treat members and teammates with respect.</li><li>Keep team discussions and decisions private.</li><li>Follow the moderation guidelines on every action.</li><li>Report problems to a senior member instead of handling them alone.</li></ol>
+  <div class="callout"><span aria-hidden="true">💡</span><div><p>Breaking these rules can lead to the steps described under How to [Punishments].</p></div></div>`},
+ 'guidelines': {icon:'🛡️', title:'Moderation Guidelines', cover:'GUIDELINES', edited:'January 20, 2026 1:11 PM',
+  body:`<p>Use these guidelines to keep moderation fair and consistent.</p>
+  <h2>Before you act</h2>
+  <ul><li>Check the context of the message or behavior.</li><li>Look for previous actions on the same member.</li><li>Choose the smallest action that solves the problem.</li></ul>
+  <h2>When in doubt</h2><p>Don't act alone. Ask another moderator to review the case.</p>`},
+ 'absence': {icon:'🌅', title:'Absence Policy', cover:'ABSENCE', edited:'January 20, 2026 1:11 PM',
+  body:`<p>Let the team know when you can't be active, so nobody has to guess.</p>
+  <h2>Short absences</h2><p>Post a message in the team channel with your dates before you leave.</p>
+  <h2>Long absences</h2><p>Tell a senior member in advance. Extended inactivity without notice may be reviewed.</p>`},
+ 'punishments': {icon:'🚩', title:'How to [Punishments]', cover:'PUNISHMENTS', edited:'January 20, 2026 1:11 PM',
+  body:`<p>Punishments follow an escalation ladder. Start at the lowest step that fits the situation.</p>
+  <h2>Escalation steps</h2>
+  <ol><li>Verbal warning</li><li>Mute</li><li>Temporary ban</li><li>Permanent ban</li></ol>
+  <h2>Documenting your action</h2><p>Record who was punished, why, and which rule applied, every time.</p>`},
+ 'calendar': {icon:'📅', title:'Team-Calendar', cover:'CALENDAR', edited:'January 20, 2026 1:11 PM',
+  body:`<p>Team meetings and events are listed here.</p>
+  <h2>Upcoming</h2>
+  <table><thead><tr><th>Date</th><th>Event</th><th>Notes</th></tr></thead>
+  <tbody><tr><td>TBD</td><td>Team meeting</td><td>Add details here</td></tr></tbody></table>`}
+};
+let pushed = false, busy = false;
+const current = () => document.querySelector('.entry');
+
+function openEntry(id, push = true){
+  const data = entries[id], card = document.querySelector('.card[data-id="'+id+'"]');
+  if(!data || !card || current() || busy) return;
+  const r = card.getBoundingClientRect();
+  const el = document.createElement('div');
+  el.className = 'entry'; el.dataset.id = id;
+  el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); el.setAttribute('aria-label', data.title);
+  el.style.cssText = 'top:'+r.top+'px;left:'+r.left+'px;width:'+r.width+'px;height:'+r.height+'px';
+  el.innerHTML = '<div class="inner"><div class="e-bar"><button class="e-back" type="button">← Back to Hub</button><span>Home / '+data.title+'</span></div>'
+    + '<div class="e-cover'+(data.pic?' pic':'')+'">'+(data.pic?'':data.cover)+'</div>'
+    + '<div class="e-wrap"><h1><span aria-hidden="true">'+data.icon+'</span> '+data.title+'</h1>'
+    + '<div class="e-meta">Last edited '+data.edited+' · Wisp</div>'+data.body+'</div></div>';
+  document.body.appendChild(el);
+  document.documentElement.style.overflow = 'hidden';
+  el.querySelector('.e-back').addEventListener('click', requestClose);
+  el.getBoundingClientRect();
+  requestAnimationFrame(() => {
+    el.style.top = '0'; el.style.left = '0'; el.style.width = '100vw'; el.style.height = '100vh'; el.style.borderRadius = '0';
+  });
+  setTimeout(() => { el.classList.add('ready'); el.querySelector('.e-back').focus({preventScroll:true}); }, 460);
+  pushed = push;
+  if(push) history.pushState({id}, '', '#'+id);
+}
+
+function closeEntry(){
+  const el = current();
+  if(!el || busy) return;
+  busy = true;
+  const id = el.dataset.id, card = document.querySelector('.card[data-id="'+id+'"]');
+  el.classList.remove('ready');
+  setTimeout(() => {
+    const r = card.getBoundingClientRect();
+    el.style.top = r.top+'px'; el.style.left = r.left+'px'; el.style.width = r.width+'px'; el.style.height = r.height+'px'; el.style.borderRadius = '6px';
+  }, 300);
+  setTimeout(() => {
+    el.remove(); document.documentElement.style.overflow = ''; busy = false; card.focus({preventScroll:true});
+  }, 820);
+}
+
+function requestClose(){
+  if(pushed){ history.back(); }
+  else { history.replaceState(null, '', location.pathname + location.search); closeEntry(); }
+}
+
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-id]');
+  if(!a || a.closest('.entry')) return;
+  e.preventDefault(); openEntry(a.dataset.id);
+});
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && current()) requestClose(); });
+window.addEventListener('popstate', () => {
+  const id = location.hash.slice(1);
+  if(entries[id]) openEntry(id, false); else closeEntry();
+});
+if(entries[location.hash.slice(1)]) openEntry(location.hash.slice(1), false);
 </script>
 </body>
 </html>
